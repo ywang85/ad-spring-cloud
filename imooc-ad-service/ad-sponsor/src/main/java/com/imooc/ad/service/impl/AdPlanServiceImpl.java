@@ -37,7 +37,7 @@ public class AdPlanServiceImpl implements IAdPlanService {
         }
 
         // 确保关联用户对象存在
-        Optional<AdUser> adUser = adUserRepository.findById(request.getId());
+        Optional<AdUser> adUser = adUserRepository.findById(request.getUserId());
         if (!adUser.isPresent()) {
             throw new AdException(Constants.ErrorMsg.CAN_NOT_FIND_RECORD);
         }
@@ -47,7 +47,8 @@ public class AdPlanServiceImpl implements IAdPlanService {
             throw new AdException(Constants.ErrorMsg.SAME_NAME_PLAN_ERROR);
         }
 
-        AdPlan newAdPlan = adPlanRepository.save(new AdPlan(request.getUserId(), request.getPlanName(), CommonUtils.parseStringDate(request.getStartDate()), CommonUtils.parseStringDate(request.getEndDate())));
+        AdPlan newAdPlan = adPlanRepository.save(new AdPlan(request.getUserId(), request.getPlanName(),
+                CommonUtils.parseStringDate(request.getStartDate()), CommonUtils.parseStringDate(request.getEndDate())));
         return new AdPlanResponse(newAdPlan.getId(), newAdPlan.getPlanName());
     }
 

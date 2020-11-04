@@ -47,6 +47,6 @@ public class AdPlan {
         this.startDate = startDate;
         this.endDate = endDate;
         this.createTime = new Date();
-        this.endDate = createTime;
+        this.updateTime = createTime;
     }
 }
