@@ -44,3 +44,6 @@ adconf:
     password: wyj931109
     binlongName: ""
     position: -1
+
+  kafka:
+    topic: ad-search-mysql-data
