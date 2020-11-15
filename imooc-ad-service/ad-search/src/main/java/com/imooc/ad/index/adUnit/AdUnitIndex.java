@@ -3,9 +3,10 @@ package com.imooc.ad.index.adUnit;
 import com.imooc.ad.index.IndexAware;
 import com.imooc.ad.index.adplan.AdPlanObject;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.stereotype.Component;
 
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Component
@@ -16,6 +17,33 @@ public class AdUnitIndex implements IndexAware<Long, AdUnitObject> {
 
     static {
         objectMap = new ConcurrentHashMap<>();
+    }
+
+    // 根据不同的广告位在原先索引map中的所有广告位做过滤，找出符合要求的推广单元id
+    public Set<Long> match(Integer positionType) {
+        Set<Long> adUnitIds = new HashSet<>();
+        objectMap.forEach((k, v) -> {
+            if (AdUnitObject.isAdSlotTypeOK(positionType, v.getPositionType())) {
+                adUnitIds.add(k);
+            }
+        });
+        return adUnitIds;
+    }
+
+    public List<AdUnitObject> fetch(Collection<Long> adUnitIds) {
+        if (CollectionUtils.isEmpty(adUnitIds)) {
+            return Collections.emptyList();
+        }
+        List<AdUnitObject> result = new ArrayList<>();
+        adUnitIds.forEach(u -> {
+            AdUnitObject object = get(u);
+            if (object == null) {
+                log.error("AdUnitObject not found: {}", u);
+                return;
+            }
+            result.add(object);
+        });
+        return result;
     }
 
     @Override

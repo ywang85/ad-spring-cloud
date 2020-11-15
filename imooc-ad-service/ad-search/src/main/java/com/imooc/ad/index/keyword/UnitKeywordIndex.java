@@ -70,6 +70,7 @@ public class UnitKeywordIndex implements IndexAware<String, Set<Long>> {
         log.info("UnitKeywordIndex after delete: {}", unitKeywordMap);
     }
 
+    // 判断keywords在不在unitId对应的所有keywords里面
     public boolean match(Long unitId, List<String> keywords) {
         if (unitKeywordMap.containsKey(unitId) && CollectionUtils.isNotEmpty(unitKeywordMap.get(unitId))) {
             Set<String> unitKeywords = unitKeywordMap.get(unitId);

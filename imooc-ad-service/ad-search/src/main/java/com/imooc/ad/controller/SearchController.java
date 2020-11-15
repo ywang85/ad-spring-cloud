@@ -5,6 +5,9 @@ import com.imooc.ad.annotation.IgnoreResponseAdvice;
 import com.imooc.ad.client.SponsorClient;
 import com.imooc.ad.client.vo.AdPlan;
 import com.imooc.ad.client.vo.AdPlanGetRequest;
+import com.imooc.ad.search.ISearch;
+import com.imooc.ad.search.vo.SearchRequest;
+import com.imooc.ad.search.vo.SearchResponse;
 import com.imooc.ad.vo.CommonResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +27,9 @@ public class SearchController {
     @Autowired
     private SponsorClient sponsorClient;
 
+    @Autowired
+    private ISearch iSearch;
+
     @IgnoreResponseAdvice
     @PostMapping("/getAdPlansByRibbon")
     public CommonResponse<List<AdPlan>> getAdPlansByRibbon(@RequestBody AdPlanGetRequest request) {
@@ -40,5 +46,11 @@ public class SearchController {
     public CommonResponse<List<AdPlan>> getAdPlans(@RequestBody AdPlanGetRequest request) {
         log.info("ad-search: getAdPlans -> {}", JSON.toJSONString(request));
         return sponsorClient.getAdPlans(request);
+    }
+
+    @PostMapping("/fetchAds")
+    public SearchResponse fetchAds(@RequestBody SearchRequest request) {
+        log.info("ad-search: fetchAds -> {}", JSON.toJSONString(request));
+        return iSearch.fetchAds(request);
     }
 }
