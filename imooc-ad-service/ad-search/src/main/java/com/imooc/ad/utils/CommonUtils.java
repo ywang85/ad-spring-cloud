@@ -30,7 +30,7 @@ public class CommonUtils {
             sb.append(arg);
             sb.append("-");
         }
-        return sb.deleteCharAt(sb.length()).toString();
+        return sb.deleteCharAt(sb.length() - 1).toString();
     }
 
     // Tue Jan 01 09:00:00 CST 2019
