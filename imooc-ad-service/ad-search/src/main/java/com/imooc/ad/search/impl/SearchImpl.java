@@ -50,7 +50,7 @@ public class SearchImpl implements ISearch {
         Map<String, List<SearchResponse.Creative>> adSlot2Ads = response.getAdSlot2Ads();
         for (AdSlot adSlot : adSlots) {
             Set<Long> targetUnitIdSet;
-            // 根据流量类型获取初始的AdUnit
+            // 根据流量类型获取初始的adUnitId
             Set<Long> adUnitIdSet = DataTable.of(AdUnitIndex.class).match(adSlot.getPositionType());
 
             if (relation == FeatureRelation.AND) {
@@ -62,7 +62,7 @@ public class SearchImpl implements ISearch {
             } else {
                 targetUnitIdSet = getOrRelationUnitIds(adUnitIdSet, keywordFeature, districtFeature, itFeature);
             }
-            // 根据unitId从AdUnitIndex的map中获取AdUnitObject对象，并且根据状态过滤
+            // 根据条件过滤之后的unitId从AdUnitIndex的map中获取AdUnitObject对象，并且根据状态过滤
             List<AdUnitObject> unitObjects = DataTable.of(AdUnitIndex.class).fetch(targetUnitIdSet);
             filterAdUnitAndPlanStatus(unitObjects, CommonStatus.VALID);
 
