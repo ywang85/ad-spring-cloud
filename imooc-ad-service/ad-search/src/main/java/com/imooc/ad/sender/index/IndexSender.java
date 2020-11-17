@@ -4,8 +4,8 @@ import com.alibaba.fastjson.JSON;
 import com.imooc.ad.dump.table.*;
 import com.imooc.ad.handler.AdLevelDataHandler;
 import com.imooc.ad.index.DataLevel;
-import com.imooc.ad.mysql.constant.Constant;
-import com.imooc.ad.mysql.dto.MySqlRowData;
+import com.imooc.ad.constant.Constant;
+import com.imooc.ad.dto.MySqlRowData;
 import com.imooc.ad.sender.ISender;
 import com.imooc.ad.utils.CommonUtils;
 import lombok.extern.slf4j.Slf4j;
@@ -19,7 +19,7 @@ import java.util.Map;
  * binlogRowData -> MySqlRowData -> Table对象 -> Object对象 -> 对索引进行更新
  */
 @Slf4j
-@Component("indexSender")
+@Component
 public class IndexSender implements ISender {
 
     @Override
