@@ -1,0 +1,65 @@
+ParseTemplate(database = imooc_ad_data, tableTemplateMap = {
+	ad_unit_it = TableTemplate(tableName = ad_unit_it, level = 4, opTypeFieldSetMap = {
+		ADD = [unit_id, it_tag],
+		DELETE = [unit_id, it_tag]
+	}, posMap = {
+		1 = unit_id,
+		2 = it_tag
+	}),
+	ad_unit = TableTemplate(tableName = ad_unit, level = 3, opTypeFieldSetMap = {
+		UPDATE = [id, unit_status, position_type, plan_id],
+		ADD = [id, unit_status, position_type, plan_id],
+		DELETE = [id]
+	}, posMap = {
+		0 = id,
+		1 = plan_id,
+		3 = unit_status,
+		4 = position_type
+	}),
+	ad_plan = TableTemplate(tableName = ad_plan, level = 2, opTypeFieldSetMap = {
+		UPDATE = [id, user_id, plan_status, start_date, end_date],
+		ADD = [id, user_id, plan_status, start_date, end_date],
+		DELETE = [id]
+	}, posMap = {
+		0 = id,
+		1 = user_id,
+		3 = plan_status,
+		4 = start_date,
+		5 = end_date
+	}),
+	ad_creative = TableTemplate(tableName = ad_creative, level = 2, opTypeFieldSetMap = {
+		UPDATE = [id, type, material_type, height, width, audit_status, url],
+		ADD = [id, type, material_type, height, width, audit_status, url],
+		DELETE = [id]
+	}, posMap = {
+		0 = id,
+		2 = type,
+		3 = material_type,
+		4 = height,
+		5 = width,
+		8 = audit_status,
+		10 = url
+	}),
+	creative_unit = TableTemplate(tableName = creative_unit, level = 3, opTypeFieldSetMap = {
+		ADD = [creative_id, unit_id],
+		DELETE = [creative_id, unit_id]
+	}, posMap = {
+		1 = creative_id,
+		2 = unit_id
+	}),
+	ad_unit_keyword = TableTemplate(tableName = ad_unit_keyword, level = 4, opTypeFieldSetMap = {
+		ADD = [unit_id, keyword],
+		DELETE = [unit_id, keyword]
+	}, posMap = {
+		1 = unit_id,
+		2 = keyword
+	}),
+	ad_unit_district = TableTemplate(tableName = ad_unit_district, level = 4, opTypeFieldSetMap = {
+		ADD = [unit_id, province, city],
+		DELETE = [unit_id, province, city]
+	}, posMap = {
+		1 = unit_id,
+		2 = province,
+		3 = city
+	})
+})
